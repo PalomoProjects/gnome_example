@@ -1,23 +1,24 @@
-CC ?= gcc
-PROGRAM = app_porta.exe
-CFILES := $(shell find -name '*.c')
-OBJS = $(CFILES:.c=.o)
-DEPDIR = .deps
-CFLAGS = `pkg-config --cflags gtk+-3.0` -std=c11 -O0 -g -Wall
-LIBS = `pkg-config --libs gtk+-3.0 gmodule-2.0` -lsqlite3
+CC = gcc
+SRC=src
+BIN=bin
+INC=include
+OUTPUT=output
+PROGRAM = gnome
+CFLAGS = -I$(INC) -std=c11 -O0 -g -Wall `pkg-config --cflags gtk+-3.0`
+LIBS = `pkg-config --libs gtk+-3.0 gmodule-2.0`
 
-all: $(PROGRAM)
+all: $(BIN)/$(PROGRAM)
 
--include $(OBJS:%.o=$(DEPDIR)/%.Po)
+$(BIN)/$(PROGRAM): $(OUTPUT)/home_gtk.o $(OUTPUT)/main.o
+	$(CC) $(OUTPUT)/home_gtk.o $(OUTPUT)/main.o -o $(BIN)/$(PROGRAM) $(LDFLAGS) $(ELFFLAG)
 
-%.o: %.c
-	@mkdir -p $(DEPDIR)
-	$(CC) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $(CFLAGS) $<
-	@mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+$(OUTPUT)/main.o: $(SRC)/main.c $(INC)/home_gtk.h
+	$(CC) $(CFLAGS) -c $(SRC)/main.c -o $(OUTPUT)/main.o
 
-$(PROGRAM): $(OBJS)
-	$(CC) -o $(PROGRAM) $(OBJS) $(LIBS)
+$(OUTPUT)/home_gtk.o: $(SRC)/home_gtk.c $(INC)/home_gtk.h
+	$(CC) $(CFLAGS) -c $(SRC)/home_gtk.c -o $(OUTPUT)/home_gtk.o
+
 
 clean:
-	rm -f $(OBJS)
-	rm -f $(PROGRAM)
+	rm -f $(OUTPUT)/$(PROGRAM)
+	rm -f $(BIN)/*.o
