@@ -498,7 +498,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="relief">half</property>
-                <signal name="clicked" handler="on_widgets_gtk_destroy" swapped="no"/>
+                <signal name="clicked" handler="on_home_gtk_destroy" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">True</property>

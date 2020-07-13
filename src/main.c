@@ -6,7 +6,7 @@
  */
 
 
-#include "home_gtk.h"
+#include "widget_gtk.h"
 
 int main(int argc, char **argv) {
 
@@ -14,7 +14,7 @@ int main(int argc, char **argv) {
 	gtk_init( &argc, &argv);
 
 	/** show main windows*/
-	start_home_gtk();
+	start_widget_gtk();
 
 	/* Start main loop */
 	gtk_main();
