@@ -5,50 +5,52 @@
  *      Author: gualberto
  */
 
+ #include <stdlib.h>
+ #include <stdio.h>
+ #include <string.h>
+ #include <stdbool.h>
+ #include <gtk/gtk.h>
+
 #ifndef WIDGET_GTK_H_
 #define WIDGET_GTK_H_
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <gtk/gtk.h>
+#define GTK_UX_WINDOW_NAME              "widgets_window"
+#define GTK_UX_FILE									    "glade/gui_main.glade"
+#define GTK_CSS_FILE                    "css/mystyle.css"
 
-/** Main data structure definition */
+/* Main data structure definition */
 typedef struct {
-	 /* Widgets */
-	    GtkWidget *widgets_window;  /* Main application window */
+  	GtkWidget *window;  					/* Main application window */
+    GObject *button5; 							/* Button for counter*/
+  	GObject *label16; 								/* Label for print Object object */
+    GObject *comboboxtext1; 	/* */
+    GObject *label20; 									/* */
+    GObject *checkbutton1; 						/* */
+  	GObject *checkbutton2; 						/* */
+  	GObject *image3; 										/* */
+    GObject *radiobutton1; 							/* */
+    GObject *radiobutton2; 							/* */
+    GObject *image4; 									/* */
+    GObject *scale_obj; 								/* Scale object*/
+  	GObject *h_scale;										/* */
+  	GObject *adjustment1;						/* */
+  	GObject *levelbar1;								/* */
+    GObject *progressbar1; 				/* Progress bar object*/
+  	GObject *label22; 							/* Label for show the progress bar value*/
+  	GtkSwitch *switch1; 								/* Switch for active and deactivate spinner */
+  	GtkSpinner *spinner1; 							/* Spinner object */
+}object;
 
-	    GtkProgressBar *progress_bar; /* Progress bar object*/
-	    GtkLabel *lbl_progressb; /* Label for show the progress bar value*/
+/* display  */
+typedef struct{
+    GtkCssProvider *provider;
+    GdkDisplay *display;
+    GdkScreen *screen;
+    GtkBuilder *builder; 	/* Build an interface from an XML UI definition */
+    GtkWindowPosition position;
+}ux_control;
 
-	    GtkSwitch *switch_obj; /* Switch for active and deactivate spinner */
-	    GtkSpinner *spinner_obj; /* Spinner object */
-
-	    GtkButton *btn_counter; /* Button for counter*/
-	    GtkLabel *lbl_counter; /* Label for print Object object */
-
-	    GtkWidget *scale_obj; /* Scale object*/
-
-	    GtkComboBoxText *combo_box_txt_obj; /* */
-	    GtkLabel *lbl_combo; /* */
-
-	    GtkCheckButton *chk_btn_1; /** */
-	    GtkCheckButton *chk_btn_2; /** */
-	    GtkImage *img_val; /** */
-
-	    GtkRadioButton *r_btn_1; /** */
-	    GtkRadioButton *r_btn_2; /** */
-	    GtkImage *img_val_r; /** */
-
-	    GtkScale *h_scale;
-	    GtkAdjustment *hadjustment;
-
-
-	    GtkLevelBar *mylvl_bar;
-
-}controls;
-
-/** initialization widget window */
-void start_widget_gtk(void);
+/* initialization widget window */
+bool init_widget_gtk(object *widget, ux_control *screen, const gchar *glade, const gchar *css);
 
 #endif
