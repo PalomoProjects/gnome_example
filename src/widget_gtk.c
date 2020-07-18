@@ -2,7 +2,7 @@
  *  File: widget_gtk.c
  *  Created on: July 17, 2020
  *  Author: gualberto
- *  Description:
+ *  Description: widget controller
  *********************************************/
 #include "widget_gtk.h"
 

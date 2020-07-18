@@ -2,7 +2,7 @@
 *  File: main.c
 *  Created on: Mar 26, 2019
 *  Author: gualberto
-*  Description:
+*  Description: main entry point for this example
 ********************************************/
 
 #include "widget_gtk.h"

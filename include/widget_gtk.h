@@ -2,7 +2,7 @@
  *  File: widget_gtk.h
  *  Created on: July 17, 2020
  *  Author: gualberto
- *  Description:
+ *  Description: widget header file
  ********************************************/
 
 #include <stdlib.h>
