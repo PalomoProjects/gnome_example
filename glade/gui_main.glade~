@@ -13,6 +13,7 @@
     <property name="height_request">480</property>
     <property name="can_focus">False</property>
     <property name="resizable">False</property>
+    <property name="window_position">center</property>
     <property name="decorated">False</property>
     <child>
       <object class="GtkGrid" id="grid1">
@@ -75,7 +76,7 @@
                 <property name="can_focus">True</property>
                 <property name="halign">center</property>
                 <property name="valign">center</property>
-                <signal name="state-set" handler="on_switch_active" swapped="no"/>
+                <signal name="state-set" handler="on_switch_activated" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -125,7 +126,7 @@
                 <property name="justify">center</property>
                 <attributes>
                   <attribute name="font-desc" value="Arial 20"/>
-                  <attribute name="foreground" value="#a4a400000000"/>
+                  <attribute name="foreground" value="#cda6b2eab2ea"/>
                 </attributes>
               </object>
               <packing>
@@ -167,10 +168,7 @@
                 <property name="can_focus">False</property>
                 <property name="halign">center</property>
                 <property name="valign">center</property>
-                <property name="label" translatable="yes">Your selection was: </property>
-                <attributes>
-                  <attribute name="font-desc" value="Serif 13"/>
-                </attributes>
+                <property name="label" translatable="yes">Selected: </property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -209,8 +207,8 @@
                 <property name="valign">center</property>
                 <property name="label" translatable="yes">Progress Bar</property>
                 <attributes>
-                  <attribute name="font-desc" value="Verdana Bold Italic 14"/>
-                  <attribute name="foreground" value="#ffffffffffff"/>
+                  <attribute name="font-desc" value="DejaVu Sans Bold Semi-Condensed 15"/>
+                  <attribute name="foreground" value="#efef29292929"/>
                 </attributes>
               </object>
               <packing>
@@ -243,7 +241,7 @@
                 <property name="label" translatable="yes">Value: 0.00%</property>
                 <attributes>
                   <attribute name="font-desc" value="Arial 20"/>
-                  <attribute name="foreground" value="#ffffffffffff"/>
+                  <attribute name="foreground" value="#eeeeeeeeecec"/>
                 </attributes>
               </object>
               <packing>
@@ -283,10 +281,13 @@
                 <property name="can_focus">False</property>
                 <property name="halign">center</property>
                 <property name="valign">center</property>
-                <property name="label" translatable="yes">Check button widgets</property>
+                <property name="label" translatable="yes">Check button</property>
+                <property name="justify">center</property>
+                <property name="ellipsize">end</property>
                 <attributes>
-                  <attribute name="font-desc" value="Century Schoolbook L Bold 14"/>
-                  <attribute name="foreground" value="#ffffffffffff"/>
+                  <attribute name="font-desc" value="Liberation Sans Bold 17"/>
+                  <attribute name="style" value="normal"/>
+                  <attribute name="foreground" value="#00000000ffff"/>
                 </attributes>
               </object>
               <packing>
@@ -375,10 +376,11 @@
                 <property name="can_focus">False</property>
                 <property name="halign">center</property>
                 <property name="valign">center</property>
-                <property name="label" translatable="yes">Radio button widgets</property>
+                <property name="label" translatable="yes">Radio button</property>
+                <property name="justify">center</property>
                 <attributes>
-                  <attribute name="font-desc" value="Century Schoolbook L Bold Italic 14"/>
-                  <attribute name="foreground" value="#ffffffffffff"/>
+                  <attribute name="font-desc" value="DejaVu Sans Bold Semi-Condensed 17"/>
+                  <attribute name="foreground" value="#c3c820c5efc8"/>
                 </attributes>
               </object>
               <packing>
@@ -473,7 +475,7 @@
                 <signal name="value-changed" handler="on_moved_hscale" swapped="no"/>
               </object>
               <packing>
-                <property name="expand">False</property>
+                <property name="expand">True</property>
                 <property name="fill">True</property>
                 <property name="position">0</property>
               </packing>
@@ -498,7 +500,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="relief">half</property>
-                <signal name="clicked" handler="on_widgets_gtk_destroy" swapped="no"/>
+                <signal name="clicked" handler="on_clicked_exit" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">True</property>

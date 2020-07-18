@@ -1,6 +1,6 @@
 #widgets_window {
-	background-image: linear-gradient(0deg, #555753, #fef3f4);
-	/*background-image: url(img/back.jpg);*/
+	/*background-image: linear-gradient(0deg, #FF7100, #fef3f4);*/
+	background-image: url("/home/palomo/gnome_example/img/back.png");
 }
 
 #button5  {
@@ -8,12 +8,6 @@
   font-size: 14px;
   border: 3px solid #204a87;
 	border-radius: 15px;
-}
-
-#label16  {
-	color: #fce94f;
-	font-weight: bold;
-	font-size: 32px;
 }
 
 #button6  {
@@ -25,7 +19,7 @@
 
 #checkbutton1, #checkbutton2, #radiobutton1, #radiobutton2  {
 	color: white;
-    font-size: 16px;
+	font-size: 16px;
 }
 
 #comboboxtext1, #comboboxtext-entry{
@@ -34,19 +28,35 @@
 	font-weight: bold;
 }
 
-#label20  {
-	color: #ffffff;
+#label16{
+	color: #008EFF;
 	font-weight: bold;
-    font-size: 18px;
+	font-size: 32px;
 }
 
+#label20{
+	color: #008EFF;
+	font-weight: bold;
+  font-size: 34px;
+}
 
+#label19{
+	color: #0000FF;
+	font-weight: bold;
+  font-size: 18px;
+}
+
+#label24{
+	color: #008EFF;
+	font-weight: bold;
+  font-size: 18px;
+}
 
 #label1, #label2{
 	font-size: 12px;
 	color: white;
 	font-weight: bold;
-    font-size: 14px;
+  font-size: 14px;
 }
 
 /*

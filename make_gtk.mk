@@ -1,4 +1,6 @@
-CC=gcc
+#CC = arm-angstrom-linux-gnueabi-gcc -march=armv7-a -mthumb -mfpu=neon -mfloat-abi=hard --sysroot=/usr/local/oecore-x86_64/sysroots/armv7at2hf-neon-angstrom-linux-gnueabi
+#CC ?= arm-angstrom-linux-gnueabi-gcc
+CC ?= gcc
 SRC=src
 BIN=bin
 INC=include

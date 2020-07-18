@@ -1,9 +1,9 @@
-/*
- * widget_gtk.c
- *
- *  Created on: Mar 28, 2019
+/********************************************
+ *  File: widget_gtk.c
+ *  Created on: July 17, 2020
  *  Author: gualberto
- */
+ *  Description:
+ *********************************************/
 #include "widget_gtk.h"
 
 
@@ -19,7 +19,7 @@ void on_clicked_checkbutton(GtkToggleButton *toggle_button, object *widgets);
 void on_clicked_radiobuton (GtkToggleButton *togglebutton, object *widget);
 gboolean tmr_progress_bar_handler(object *myWidgets);
 
-
+/* init widgets */
 bool init_widget_gtk(object *widget, ux_control *control, const gchar *glade, const gchar *css){
 
 	GError *error = NULL;
@@ -40,12 +40,14 @@ bool init_widget_gtk(object *widget, ux_control *control, const gchar *glade, co
 											GTK_STYLE_PROVIDER (control->provider),
 											GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-	gtk_css_provider_load_from_file(control->provider, g_file_new_for_path(css), &error);
+	if ( !gtk_css_provider_load_from_file(control->provider, g_file_new_for_path(css), &error) ){
+		return false;
+	}
 
 	/* Create new GtkBuilder object */
 	control->builder = gtk_builder_new();
 
-	if(!gtk_builder_add_from_file(control->builder, glade, &error )){
+	if( !gtk_builder_add_from_file(control->builder, glade, &error ) ){
 		return false;
 	}
 
@@ -94,6 +96,9 @@ bool init_widget_gtk(object *widget, ux_control *control, const gchar *glade, co
 	widget->progressbar1 = gtk_builder_get_object(control->builder,"progressbar1");
 	widget->label22 = gtk_builder_get_object(control->builder,"label22");
 
+	widget->switch1 = gtk_builder_get_object(control->builder,"switch1");
+	widget->spinner1 = gtk_builder_get_object(control->builder,"spinner1");
+
 	/* Connect signals */
 	gtk_builder_connect_signals(control->builder, widget);
 
@@ -107,6 +112,7 @@ bool init_widget_gtk(object *widget, ux_control *control, const gchar *glade, co
 	gtk_window_set_default_size (GTK_WINDOW(widget->window), 800,480);
 	/* Set window position*/
 	gtk_window_set_position(GTK_WINDOW(widget->window), control->position);
+
 	/* Set full screen*/
 	gtk_window_fullscreen(GTK_WINDOW(widget->window));
 	/* Show window. All other widgets are automatically shown by GtkBuilder */
@@ -130,10 +136,10 @@ void on_clicked_comboboxtext1(GtkComboBox *comboboxtext1, object *widget)
   GtkComboBox *combobox = comboboxtext1;
 
   if (gtk_combo_box_get_active (combobox) != 0) {
-    datalabel = g_strdup_printf("You chose %s\n",
-    		gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT(combobox)));
+    datalabel = g_strdup_printf("%s",
+						gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT(combobox)));
     gtk_label_set_text(GTK_LABEL(widget->label20), datalabel);
-    g_print ("You chose %s\n", datalabel);
+    g_print ("%s\n", datalabel);
     g_free (datalabel);
   }
 
@@ -196,8 +202,8 @@ void on_moved_hscale (GtkRange *range, object *widget)
 	gtk_level_bar_set_value (GTK_LEVEL_BAR(widget->levelbar1), pos);
 }
 
-void on_switch_active(GtkSwitch* myswitch){
-	flag_switch = gtk_switch_get_active (myswitch);
+void on_switch_activated(GtkSwitch* switch1){
+	flag_switch = gtk_switch_get_active (switch1);
 	printf("Value of switch: %d \n", flag_switch);
 }
 
@@ -212,7 +218,7 @@ void on_clicked_exit(GtkWindow *window){
 
 
 
-gboolean tmr_progress_bar_handler(object *myWidgets)
+gboolean tmr_progress_bar_handler(object *widget)
 {
 
 	gdouble fraction;
@@ -226,24 +232,24 @@ gboolean tmr_progress_bar_handler(object *myWidgets)
 	}
 
 	if(flag_tmr == TRUE){
-		//Fill in the bar with the new fraction
-		gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (myWidgets->progressbar1), fraction);
+		/*Fill in the bar with the new fraction*/
+		gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (widget->progressbar1), fraction);
 	}
 
 	gchar *datalabel = g_strdup_printf("Value: %.2f%c", fraction * 100, 37);
 	if(flag_tmr == TRUE){
-		// Write project description
-		gtk_label_set_text(GTK_LABEL(myWidgets->label22), datalabel);
+		/* Write project description*/
+		gtk_label_set_text(GTK_LABEL(widget->label22), datalabel);
 	}
 
 	if ( flag_switch ){
 		if(flag_tmr == TRUE){
-			//gtk_spinner_start (GTK_SPINNER (myWidgets->spinner_obj));
+			gtk_spinner_start (GTK_SPINNER (widget->spinner1));
 		}
 
 	}else{
 		if(flag_tmr == TRUE){
-			//gtk_spinner_stop (GTK_SPINNER (myWidgets->spinner_obj));
+			gtk_spinner_stop (GTK_SPINNER (widget->spinner1));
 		}
 	}
 
